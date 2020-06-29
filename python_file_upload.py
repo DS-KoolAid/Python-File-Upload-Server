@@ -11,6 +11,17 @@ UPLOAD_FOLDER = '.'
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+@app.route('/', methods=['GET'])
+def landing_page():
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post action='/upload' enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    '''
 
 @app.route('/upload', methods=['GET','POST'])
 def upload_file():
@@ -48,5 +59,5 @@ if __name__=="__main__":
     logger.setLevel(logging.DEBUG)
     logger.addHandler(logging.StreamHandler())
     main()
-    
-    
+
+
